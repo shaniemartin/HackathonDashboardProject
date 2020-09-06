@@ -1,0 +1,157 @@
+<%- include ("partials/header") %>
+
+<div class="container">
+    <h1 class="text-center my-5">GOOD DAY (YOUR NAME)!</h1>
+
+    <!-- Weather -->
+    <div class="row justify-content-around my-5">
+        <div class="col-md-4 yellow-container text-center">
+            <img src="../assets/Container.png" alt="">
+            <div class="yellow-container-header">
+                Weather
+            </div>
+
+            <div class="yellow-container-content">
+                <div class="row">
+                    <div class="col-6">
+                        <img id="weatherIconImg" src="" alt="">
+                    </div>
+                    
+                    <div class="col-6">
+                        <p><span id="temperature"></span> degrees</p>
+                    </div>
+
+                </div>
+
+                <p class="mt-md-4"><span id="location"></span></p>
+               
+            </div>
+
+        </div>
+
+        <!-- NEWS -->
+            <div class="col-md-4 yellow-container text-center">
+                    <img src="../assets/Container.png" alt="">
+                    <div class="yellow-container-header">
+                        News
+                    </div>
+                    <div class="yellow-container-content">
+                        <p id="news-header"></p>
+                        <p id="news-content"></p>
+                    </div>
+            </div>
+
+<!-- SPORT -->
+        <div class="col-md-4 yellow-container text-center">
+            <img src="../assets/Container.png" alt="">
+                <div class="yellow-container-header">
+                    Sport
+                </div>
+                <div class="yellow-container-content">
+                </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- PHOTOS -->
+    <div class="row my-5">
+        <div class="col-md-4 yellow-container text-center">
+            <a href="/photos">
+                <img src="../assets/Container.png" alt="">
+                    <div class="yellow-container-header">
+                        Photos
+                    </div>
+                    <div class="yellow-container-content">
+                    </div>
+            </a>
+        </div>
+
+
+
+        <!-- TASKS -->
+        <div class="col-md-4 yellow-container text-center">
+            <a href="/tasks">
+                <img src="../assets/Container.png" alt="">
+                    <div class="yellow-container-header">
+                        Tasks
+                    </div>
+                    <div class="yellow-container-content">
+                    </div>
+            </a>
+        </div>
+        <div class="col-md-4 yellow-container text-center">
+            <img src="../assets/Container.png" alt="">
+                <div class="yellow-container-header">
+                    Clothes
+                </div>
+                <div class="yellow-container-content">
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+
+
+// WEATHER 
+        if ("geolocation" in navigator) {
+            console.log("geolocation available")
+            navigator.geolocation.getCurrentPosition( async position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                const weather_api_url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=d0a10211ea3d36b0a6423a104782130e`;
+
+
+                fetch(weather_api_url)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("location").innerHTML = data.name;
+                        document.getElementById("temperature").innerHTML = Math.round(data.main.temp - 273.15);
+
+                        const weatherIcon = data.weather[0].main;
+                        if (weatherIcon == "Rain") {
+                            document.getElementById("weatherIconImg").src="../assets/Rain_icon.png";
+                        }
+                        else if (weatherIcon == "Clear") {
+                            document.getElementById("weatherIconImg").src="../assets/Sun_icon.png";
+                        }
+                        else {
+                            document.getElementById("weatherIconImg").src="../assets/Clouds_icon.png";
+                        }
+                    });
+
+            });
+        } else {
+            console.log("geolocation not available");
+        }
+
+
+
+
+
+// NEWS
+
+    fetch("/news_feed")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("news-header").innerHTML = data.items[0].title;
+            document.getElementById("news-content").innerHTML = data.items[0].content;
+            document.getElementById("newsImg").src = data.items[1].thumbnail;
+            console.log(data.items[0]);
+
+
+
+        });
+</script>
+
+
+<%- include ("partials/footer") %>

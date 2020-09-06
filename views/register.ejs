@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/stylesheets/main.css">
+
+    <title>Hackathon</title>
+</head>
+
+<body>
+
+        <div class="container my-4">
+            <% if(error && error.length > 0) { %>
+            <div class="alert alert-danger" role="alert"><%= error %></div>
+            <% }%>
+        
+            <% if(success && success.length > 0) { %>
+            <div class="alert alert-success" role="alert"><%= success %></div>
+            <% }%>
+        </div>
+
+
+
+
+    <div class="container">
+        <div class="text-center" id="login-form">
+            <h1 class="my-5">Hackathon</h1>
+
+            <div class="form pt-5 ">
+                <form action="/register" method="POST">
+                    <div class="clearfix">
+                        <div class="float-left">
+                            <div class="form-group">
+                                <input type="text" placeholder="Username" name="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Password" name="password" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="float-right">
+                            <div class="form-group">
+                                <input type="email" placeholder="Email" name="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" placeholder="Confirm Password" name="password2" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                             
+
+                  
+                        <div class="form-group mt-3">
+                            <label>
+                                <input type="file" name="image" style="display:none" onchange="loadFile(event)">
+                                <img src="../assets/Add_picture.png" id="output">
+                                <div id="upload">Add picture</div>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="image" src="../assets/Register_button.png" alt="Submit" >
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+    var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById('upload').style.display = "none";
+
+        };
+
+
+    </script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+        </script>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

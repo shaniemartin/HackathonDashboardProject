@@ -1,0 +1,113 @@
+body {
+    background-image: url("../assets/Background.png");
+}
+
+#login-form {
+    height: 50vh;
+}
+
+h1 {
+    font-size: 4rem;
+    color: white;
+}
+
+#login-form input {
+    color: white;
+    font-size: 1.5rem;
+}
+
+#login-form input[type=image] {
+    width: 20rem;
+}
+
+.form-control {
+    background-color: transparent;
+    color: white;
+    border: none;
+    border-bottom: 3px solid white;
+    background-image: none !important;
+}
+
+.form-control:focus{
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid white;
+    background-image: none !important;
+    box-shadow:none;
+}
+
+.form-control::placeholder {
+    color: white;
+    font-size: 1.5rem;
+}
+
+
+#signupLink {
+    font-size: 2.5rem;
+    color: white;
+}
+
+#signupLink a {
+    color: #FFE65E;
+    text-decoration: none;
+}
+
+
+#upload {
+font-size: 2rem;
+color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+/* HOME */
+.yellow-container img {
+    max-width: 100%;
+}
+
+.yellow-container a {
+    color: black;
+}
+
+
+.yellow-container-header {
+font-size: 2rem;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.yellow-container-content {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  width: 75%
+}
+
+
+
+
+/* NEWS */
+#news-content {
+    font-size: 1rem; 
+}
+
+#news-header {
+    font-size: 1.2rem; 
+    font-weight: bold;
+}
+
+
+
+/* PHOTOS */
+.gallery-image {
+    height: 100%;
+}

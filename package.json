@@ -1,0 +1,30 @@
+{
+  "name": "therapyboxapp",
+  "version": "1.0.0",
+  "description": "Therapy Box Web dev recruitment challenge project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shanie Martin",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "feed-to-json": "^1.0.3",
+    "get-urls": "^10.0.0",
+    "jquery": "^3.5.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.10.0",
+    "node-fetch": "^2.6.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1"
+  }
+}

@@ -1,0 +1,58 @@
+<%- include ("partials/header") %>
+
+<div class="container">
+    <div class="text-center">
+        <h1 class="my-5">Hackathon</h1>
+
+
+        <div class="row justify-content-around my-5">
+            <input type="file" name="image" style="display:none" onchange="loadFile(event)">
+            <div class="col-md-4 yellow-container text-center">
+                <img src="../assets/Add_picture.png" alt="" id="output" class="gallery-image">
+                <div id="upload">Add picture</div>
+            </div>
+
+            <div class="col-md-4 yellow-container text-center">
+                <img src="../assets/Add_picture.png" alt="" class="gallery-image">
+            </div>
+
+            <div class="col-md-4 yellow-container text-center">
+                <img src="../assets/Add_picture.png" alt="" class="gallery-image">
+            </div>
+        </div>
+
+        <div class="row justify-content-around my-5">
+            <div class="col-md-4 yellow-container text-center">
+                <img src="../assets/Add_picture.png" alt="" class="gallery-image">
+            </div>
+
+            <div class="col-md-4 yellow-container text-center">
+                <img src="../assets/Add_picture.png" alt="" class="gallery-image"> 
+            </div>
+
+            <div class="col-md-4 yellow-container text-center">
+                <img src="../assets/Add_picture.png" alt="" class="gallery-image">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+    
+    
+
+        <script>
+
+        var loadFile = function (event) {
+                var image = document.getElementById('output');
+                image.src = URL.createObjectURL(event.target.files[0]);
+                document.getElementById('upload').style.display = "none";
+
+            };
+
+        </script>
+
+
+
+<%- include ("partials/footer") %>
