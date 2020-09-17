@@ -19,6 +19,7 @@ const cheerio = require('cheerio');
 
 
 var User = require("./models/user");
+var db = require("./models");
 const { response } = require("express");
 const { urlencoded } = require("body-parser");
 
@@ -45,6 +46,7 @@ mongoose.connect('mongodb://localhost:27017/Hackathon', {
 //        PLUGINS 
 // ======================
 app.use(cors())
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -88,7 +90,7 @@ app.use(function (req, res, next) {
 // ======================
 
 app.get("/home", function(req, res) {
-    res.render("landing");
+    res.render("landing", {user: req.user});
 
 });
 
@@ -175,11 +177,75 @@ app.get("/news_feed", function (req, res) {
 
 
 // ======================
-//     PHOTO ROUTES
+//     TASK ROUTES
 // ======================
-    
+
+// MAIN TASK PAGE 
 app.get("/tasks", function (req, res) {
     res.render("tasks");
+})
+
+
+//TASK API INDEX
+app.get("/api/tasks", function (req, res) {
+    db.Task.find()
+    .then(function(tasks) {
+        res.json(tasks);
+    })
+    .catch(function(err) {
+        res.send(err);
+    })
+})
+
+
+// TASK API CREATE 
+app.post("/api/tasks", function (req, res) {
+    db.Task.create(req.body)
+    .then(function(newTodo) {
+        res.status(201).json(newTodo);
+    })
+    .catch(function(err){
+        res.send(err);
+    })
+})
+
+
+
+// TASK API SHOW
+app.get("/api/tasks/:taskId", function(req, res) {
+    db.Task.findById(req.params.taskId)
+    .then(function(foundTask){
+        res.json(foundTask)
+    })
+    .catch(function(err) {
+        res.send(err);
+    })
+})
+
+
+
+// TASK API UPDATE
+app.put("/api/tasks/:taskId", function(req, res) {
+    db.Task.findOneAndUpdate({_id:req.params.taskId}, req.body, {new: true})
+        .then(function (Task) {
+            res.json(Task)
+        })
+        .catch(function (err) {
+            res.send(err);
+        })
+})
+
+
+
+// TASK API DELETE
+app.delete("/api/tasks/:taskId", function(req, res) {
+    db.Task.remove({_id:req.params.taskId})
+        .then(function () {
+            res.json({message: "WE DELETED IT"})
+        })
+        .catch(function (err) {
+            res.send(err);
+        })
 })
           
 
