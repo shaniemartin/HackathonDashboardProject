@@ -125,38 +125,62 @@ section.task-list .form {
 }
 
 section.task-list #todoInput {
-	width: 100%;
-	height: 60px;
+	width: 87%;
+    height: 100px;
+    line-height: 100px;
 	background: none;
 	border: none;
-	border-bottom: 1px solid #34495e;
+	border-bottom: 2px solid white;
 	outline: none;
-	font: 300 28px 'Ubuntu', sans-serif;
+	font-size: 1.5rem;
 	padding: 20px;
-	color: #34495e;
+    color: white;
+    display: none;
+    margin-bottom: 40px;
+
+}
+
+section.task-list #add-task-button {
+    margin-left: 30px;
+    margin-bottom: 40px;
+}
+
+input#todoInput::placeholder {
+    color: white;
+    opacity: 0.6;
 }
 
 
 section.task-list .list {
 	width: 800px;
-	margin: 0 auto;
+    margin: 0 auto;
+    list-style: none;
 }
 section.task-list .task {
 	width: 100%;
-	height: 60px;
-	line-height: 60px;
-	font-size: 20px;
-	padding: 0 20px;
-	color: #34495e;
-	transition: all .3s ease;
+    line-height: 100px;
+    height: 100px;
+	font-size: 1.5rem;
+	padding: 20px 0px;
+	color: white;
+    transition: all .3s ease;
+    border-bottom: 2px solid white;
+    display: inline-block;
 }
+
+section.task-list .list .task-checkbox {
+    height: 60px;
+    float: right;
+}
+
+
 section.task-list .task:hover {
 	background: rgba(0, 0, 0, .02);
 	cursor: pointer;
 }
 
 section.task-list .task:hover span{
-	opacity: 1;
+    opacity: 1;
 }
 
 section.task-list .done {
@@ -169,6 +193,7 @@ section.task-list li span {
   color: #c0392b;
   transition: all 0.3s;
   opacity: 0;
+  margin: 0 20px;
 }
 
 section.task-list li span:hover {

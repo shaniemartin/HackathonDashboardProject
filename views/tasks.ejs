@@ -2,116 +2,26 @@
 
 <section class="task-list">
     <div class="container">
-        <div class="text-center">
-            <h1 class="my-5">To Do List</h1>
-
-
-            <section class="form">
-                <input type="text" id="todoInput" placeholder="Insert your task here...">
-            </section>
+        <div>
+            <h1 class="my-5">Tasks</h1>
             
             <ul id="list" class="list">
             </ul>
+
+
+            <section class="form">
+                <img id="add-task-button" src="../assets/Plus_button_small.png" alt="">
+                <input type="text" id="todoInput" placeholder="Insert your task here...">
+                
+            </section>
+            
 
         </div>
     </div>
 </section>
 
 
-
-
-<script>
-
-    // SHOW TASKS ON START UP 
-        fetch("/api/tasks")
-            .then(response => response.json())
-            .then(addTasks);
-
-        
-
-
-            // CREATE NEW TASK WHEN ENTER IS PRESSED
-            document.getElementById("todoInput").addEventListener("keyup", function(event) {
-                if(event.keyCode === 13) {
-
-                        var usrInput = document.getElementById("todoInput").value;
-
-                        fetch("/api/tasks", {
-                            method: "POST", 
-                            body: JSON.stringify({
-                                name: usrInput
-                            }),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                            
-                        })
-                        .then(function(response) {
-                            return response.json();
-                        })
-                        .then(function(newTask) {
-                            document.getElementById("todoInput").value = "";
-                            addTask(newTask)
-                        })
-
-             
-                    
-                }
-            })
-
-
-    
-
-
-
-        // SHOW TASKS ON STARTUP FUNCTION
-            function addTasks(tasks) {
-                    tasks.forEach(function (task) {
-                        addTask(task)
-                    });
-                }
-          
-                
-
-        // ADD NEW TASK AND CREATE HTML FOR IT
-            function addTask(task) {
-
-                var newTask = document.createElement("LI");
-                var taskText = document.createTextNode(task.name);
-
-                var span = document.createElement("span");
-                var spanText = document.createTextNode("X");
-                span.appendChild(spanText);
-                span.className = ("deleteSpan");
-
-                newTask.className = ("task");
-
-                if (task.completed) {
-                    newTask.classList.add("done");
-                }
-
-                newTask.appendChild(taskText);
-                newTask.appendChild(span);
-                document.getElementById("list").appendChild(newTask);
-            }
-
-
-
-
-
-
-            // DELETE TASK
-            // DONE IN jQUERY AS COULDNT FIND JAVASCRIPT ALTERNATIVE
-            $(document).ready(function () {
-                    $('.list').on('click', 'span', function () {
-                    console.log("DELETED!");
-                })   
-            });
-
-
-            
-
-</script>
+<script type="module" src="scripts/task.js"></script>
 
 
 <%- include ("partials/footer") %>
