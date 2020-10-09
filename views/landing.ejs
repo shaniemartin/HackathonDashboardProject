@@ -79,7 +79,9 @@
                     <div class="yellow-container-header">
                         Tasks
                     </div>
-                    <div class="yellow-container-content">
+                    <div class="yellow-container-content task-summary">
+                        <ul id="list" class="list">
+                        </ul>
                     </div>
             </a>
         </div>
@@ -154,6 +156,40 @@
 
 
         });
+
+
+// TASKS
+        $.getJSON("/api/tasks")
+                // GET ALL TASKS ON PAGE LOAD
+                .then(addTasks)
+
+        
+
+        function addTasks(tasks) {
+            for(var i = 0 ; i < 3; i ++) {
+                addTask(tasks[i]);
+
+            }
+  
+
+            }
+        function addTask(task) {
+                var newTask = $('<li class="task">' + task.name + ' <span>X</span><a href"#" id="checked-toggle"><img src="../assets/task_box.png" class="task-checkbox todo"><img src="../assets/task-box-complete.png" class="task-checkbox checked"><a></li>');
+                newTask.data('id', task._id);
+                newTask.data('completed', task.completed);
+                var todo = newTask.find('img')[0];
+                var checked = newTask.find('img')[1];
+                if (task.completed) {
+                    newTask.addClass("done");
+                    $(todo).hide();
+                    $(checked).show();
+                } else {
+                    $(todo).show();
+                    $(checked).hide();
+                }
+                $('.list').append(newTask);
+            }
+    
 </script>
 
 

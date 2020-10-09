@@ -15,16 +15,45 @@ var methodOverride = require("method-override");
 const fetch = require("node-fetch");
 var cors = require("cors");
 var Feed = require("feed-to-json");
-const cheerio = require('cheerio');
+const multer = require('multer');
+const path = require('path');
+
 
 
 var User = require("./models/user");
 var db = require("./models");
-const { response } = require("express");
-const { urlencoded } = require("body-parser");
 
 
+// ======================
+//       MULTER 
+// ======================
+const storage = multer.diskStorage({
+    destination: './public/uploads',
+    filename: function (req, file, cb) {
+        cb(null, file.filename + '-' + Date.now() + path.extname(file.originalname))
+    }
+});
 
+const upload = multer({
+    storage: storage, 
+    limits: {fileSize: 10000000},
+    fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+}).single('uploadImage');
+
+
+function checkFileType(file, cb){
+    const filetypes = /jpeg|jpg|png|gif/;
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = filetypes.test(file.mimetype);
+
+    if(mimetype && extname) {
+        return cb(null, true)
+    } else {
+        cb('Error: Image files only');
+    }
+}
 
 
 
@@ -53,6 +82,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.json({limit: "1mb"}));
 app.use(methodOverride("_method"));
 app.use(flash());
+
 
 
 
@@ -153,6 +183,31 @@ app.get("/photos", function (req, res) {
 })
 
 
+//PHOTO API INDEX
+app.post("/upload", function (req, res) {
+    upload(req, res, (err) => {
+        if(err) {
+            res.render('photos', {
+                msg: err
+            });
+        } else {
+            if(req.file === undefined) {
+                res.render('photos', {
+                    msg: 'Error: No File selected!'
+                });
+            }else {
+                res.render('photos', {
+                    msg: 'File Uploaded!',
+                    file: `uploads/${req.file.filename}`
+                });
+            }
+        }
+    })
+})
+
+
+
+
 
 
 
@@ -201,8 +256,8 @@ app.get("/api/tasks", function (req, res) {
 // TASK API CREATE 
 app.post("/api/tasks", function (req, res) {
     db.Task.create(req.body)
-    .then(function(newTodo) {
-        res.status(201).json(newTodo);
+    .then(function(newTask) {
+        res.status(201).json(newTask);
     })
     .catch(function(err){
         res.send(err);

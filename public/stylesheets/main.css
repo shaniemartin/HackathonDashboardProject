@@ -92,6 +92,35 @@ font-size: 2rem;
   width: 75%
 }
 
+ .task-summary .list {
+     list-style: none;
+    text-align: left;
+    margin-top: -1.0rem;
+    margin-left: -1.0rem;
+}
+
+.task-summary .task{
+    line-height: 30px;
+    height: 60px;
+	padding: 20px 0px;
+	color: black;
+    border-bottom: 2px solid black;
+
+}
+
+.task-summary .task-checkbox {
+    height: 30px;
+    float: right;
+}
+
+.task-summary li span {
+  opacity: 0;
+}
+
+
+
+
+
 
 
 
@@ -110,6 +139,15 @@ font-size: 2rem;
 /* PHOTOS */
 .gallery-image {
     height: 100%;
+}
+
+.form-group.gallery , 
+.form-group.gallery label {
+    margin-bottom: 0px;
+}
+
+#upload {
+    height: 75%;
 }
 
 
@@ -183,7 +221,7 @@ section.task-list .task:hover span{
     opacity: 1;
 }
 
-section.task-list .done {
+.done {
 	text-decoration: line-through;
 	color: #bdc3c7;
 }

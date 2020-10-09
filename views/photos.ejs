@@ -2,18 +2,29 @@
 
 <div class="container">
     <div class="text-center">
-        <h1 class="my-5">Hackathon</h1>
+        <h1 class="my-5">Photos</h1>
 
+        <%= typeof msg != 'undefined' ? msg :  '' %>  
+        <!-- If type of message does not = undefined then display mesaage otherwise display empty quotes -->
 
         <div class="row justify-content-around my-5">
-            <input type="file" name="image" style="display:none" onchange="loadFile(event)">
+
             <div class="col-md-4 yellow-container text-center">
-                <img src="../assets/Add_picture.png" alt="" id="output" class="gallery-image">
-                <div id="upload">Add picture</div>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-group gallery">
+                    <label>
+                        <input type="file" name="uploadImage" style="display:none">
+                        <img src="../assets/Add_picture.png" id="output">
+                        <div id="upload"><img src="../assets/Plus_button.png"></div>
+                    </label>
+                    <input type="submit" value="SUBMIT">
+                </div>
+
+                </form>
             </div>
 
             <div class="col-md-4 yellow-container text-center">
-                <img src="../assets/Add_picture.png" alt="" class="gallery-image">
+                <img src="<%= typeof file != 'undefined' ? file : '' %>" alt="" class="gallery-image img-fluid">
             </div>
 
             <div class="col-md-4 yellow-container text-center">
